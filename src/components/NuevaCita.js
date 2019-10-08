@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uudi from 'uuid';
 
 class NuevaCita extends Component {
     state = { 
@@ -40,7 +41,14 @@ class NuevaCita extends Component {
             return;
         }
 
+        // generar objeto con los datos
+
+        const nuevaCita = {...this.state.cita};
+        nuevaCita.id = uudi();
+
         // agregar la cita al state de app
+
+        this.props.crearNuevaCita(nuevaCita)
     }
 
 
@@ -123,7 +131,6 @@ class NuevaCita extends Component {
                             </div>
                         </div>
                         <input type="submit" className="py-3 mt-2 btn btn-success btn-block"  value="Agregar nueva cita"
-                        onClick=""
                         />
                     </form>
                 </div>
