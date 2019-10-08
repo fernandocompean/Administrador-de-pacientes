@@ -8,20 +8,40 @@ class NuevaCita extends Component {
             date: '',
             time: '',
             sintomas: ''
+        },
+        error: false
+     }
+        // cuando el usuario escribe en los inputs
+    handleChange = e => {
+        // colocar lo que se esta escribiendo en state
+        this.setState({
+            cita: {
+                ...this.state.cita,
+                [e.target.name]: e.target.value
+            }
+        })
+     }
+         // cuando el usuario envía el formulario
+
+    handleSubmit = e => {
+        e.preventDefault();
+
+        // extraer valores de state
+        const { mascota, propietario, date, time, sintomas } = this.state.cita;
+
+        // validar que todos los valores estan llenos
+
+        if (mascota === '' || propietario === '' || date === '' || time === '' || sintomas === '') {
+            this.setState({
+                error: true
+            });
+
+            // detener la ejecución
+            return;
         }
-     }
 
-     handleChange = e => {
-
-         // colocar lo que se esta escribiendo en state
-
-         this.setState({
-             cita: {
-                 ...this.state.cita,
-                 [e.target.name]: e.target.value
-             }
-         })
-     }
+        // agregar la cita al state de app
+    }
 
 
     render() {
@@ -31,7 +51,9 @@ class NuevaCita extends Component {
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
-                    <form>
+                    <form
+                        onSubmit={this.handleSubmit}
+                        >
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-2 col-form-label">
                                 Nombre mascota
@@ -43,6 +65,7 @@ class NuevaCita extends Component {
                                         name="mascota"
                                         onChange={this.handleChange}
                                         value={this.state.cita.mascota}
+
                                 />
                             </div>
                         </div>
