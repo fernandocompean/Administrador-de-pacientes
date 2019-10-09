@@ -30,7 +30,7 @@ class NuevaCita extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        // extraer valores de state
+            // extraer valores de state
         const { mascota, propietario, date, time, sintomas } = this.state.cita;
 
         // validar que todos los valores estan llenos
